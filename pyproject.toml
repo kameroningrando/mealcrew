@@ -1,0 +1,9 @@
+[project]
+name = "meal-crew"
+version = "0.1.0"
+description = "Self-hosted FastAPI backend for automated meal planning."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.115.12",
+]

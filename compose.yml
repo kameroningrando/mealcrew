@@ -1,0 +1,34 @@
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: mealcrew-backend
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - mealcrew
+  db:
+    image: postgres:15
+    container_name: mealcrew-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: mealcrew
+    volumes:
+      - mealcrew-db:/var/lib/postgresql/data
+    networks:
+      - mealcrew
+
+volumes:
+  mealcrew-db:
+
+networks:
+  mealcrew:
+    driver: bridge
